@@ -34,4 +34,13 @@ public class PlayerController : MonoBehaviour
     {
         Rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Lava"))
+        {
+            Debug.Log("Game Over!");
+            Destroy(this.gameObject);
+        }
+    }
 }

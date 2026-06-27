@@ -233,8 +233,8 @@ GameObject:
   - component: {fileID: 53210702}
   - component: {fileID: 53210701}
   m_Layer: 0
-  m_Name: Floor
-  m_TagString: Untagged
+  m_Name: Lava
+  m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,7 +272,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dcea4f6512669f14c9c814ed2effbce1, type: 2}
+  - {fileID: 2100000, guid: 520938bf13624b04fb159c3db7351aca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
