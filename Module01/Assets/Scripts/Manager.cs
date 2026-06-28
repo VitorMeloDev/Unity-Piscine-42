@@ -29,6 +29,7 @@ public class Manager : MonoBehaviour
         if (CheckPlayerPosition())
         {
             Debug.Log("All players are in position!");
+            HandleScene();
         }
     }
 
@@ -40,6 +41,15 @@ public class Manager : MonoBehaviour
                 return (false);
         }
         return (true);
+    }
+
+    void HandleScene()
+    {
+        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextScene >= SceneManager.sceneCountInBuildSettings)
+            nextScene = 0;
+        SceneManager.LoadScene(nextScene);
     }
 
     void ActivePlayer(int id)
