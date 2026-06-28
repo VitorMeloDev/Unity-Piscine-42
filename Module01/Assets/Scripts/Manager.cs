@@ -7,7 +7,6 @@ public class Manager : MonoBehaviour
 {
     [SerializeField] private List<PlayerController> playerControllers = new List<PlayerController>();
     [SerializeField] private GameObject camera;
-    [SerializeField] private Vector3 camPos;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +25,21 @@ public class Manager : MonoBehaviour
             ActivePlayer(2);
         if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Backspace))
             SceneManager.LoadScene(0);
+
+        if (CheckPlayerPosition())
+        {
+            Debug.Log("All players are in position!");
+        }
+    }
+
+    bool CheckPlayerPosition()
+    {
+        for (int i = 0; i < playerControllers.Count; i++)
+        {
+            if (!playerControllers[i].GetInPosition())
+                return (false);
+        }
+        return (true);
     }
 
     void ActivePlayer(int id)
@@ -36,12 +50,12 @@ public class Manager : MonoBehaviour
             if (id == i)
             {
                 playerControllers[i].SetActive(true);
-                SetCameraPosition(playerControllers[i].gameObject.transform);
+                SetCameraPosition(playerControllers[i].gameObject.transform, playerControllers[i].camPos);
             }
         }
     }
 
-    void SetCameraPosition(Transform parent)
+    void SetCameraPosition(Transform parent, Vector3 camPos)
     {
         camera.transform.SetParent(parent);
         camera.transform.SetLocalPositionAndRotation(camPos, camera.transform.rotation);

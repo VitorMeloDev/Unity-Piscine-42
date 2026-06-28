@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private bool isActive = false;
     [SerializeField] private bool isGrounded = false;
+    [SerializeField] private bool inPosition = false;
     [SerializeField] private LayerMask layerGround;
+    public Vector3 camPos;
 
     [SerializeField] private float speed = 2;
     [SerializeField] private float jumpForce = 3;
@@ -26,21 +28,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckBox(
-            collider.bounds.center - Vector3.up * 0.55f,
-            new Vector3(
-                collider.bounds.extents.x * 0.9f,
-                0.05f,
-                collider.bounds.extents.z * 0.9f
-            ),
-            Quaternion.identity,
-            layerGround
-        );
-
         if (!isActive)
             return;
         if (Input.GetButtonDown("Jump"))
             Jump();
+
+        isGrounded = Physics.BoxCast(
+            collider.bounds.center,
+            collider.bounds.extents * 0.9f,
+            Vector3.down,
+            out hit,
+            transform.rotation,
+            m_MaxDistance,
+            ~0
+        );
     }
 
     private void FixedUpdate()
@@ -60,6 +61,16 @@ public class PlayerController : MonoBehaviour
     public void SetActive(bool value)
     {
         isActive = value;
+    }
+
+    public void SetInPosition(bool value)
+    {
+        inPosition = value;
+    }
+
+    public bool GetInPosition()
+    {
+        return inPosition;
     }
 
     void OnDrawGizmos()
