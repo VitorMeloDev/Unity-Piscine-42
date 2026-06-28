@@ -12,13 +12,13 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - White
+  - Blue
+  - Red
+  - Yellow
+  - PlayerBlue
+  - PlayerRed
+  - PlayerYellow
   - 
   - 
   - 
